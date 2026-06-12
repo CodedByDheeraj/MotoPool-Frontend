@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login | MotoPool</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .login-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: radial-gradient(circle at top left, rgba(255,176,0,0.1), transparent 25%),
+                  radial-gradient(circle at bottom right, rgba(255,120,0,0.05), transparent 30%),
+                  #0b0b0b;
+    }
+
+    .login-container {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 50px 40px;
+      max-width: 450px;
+      width: 100%;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .login-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .login-logo {
+      font-size: 60px;
+      margin-bottom: 15px;
+    }
+
+    .login-header h1 {
+      color: white;
+      font-size: 28px;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, white, #ffb000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .login-header p {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .login-form input {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 14px 16px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: Arial, sans-serif;
+      transition: 0.3s;
+    }
+
+    .login-form input::placeholder {
+      color: #888;
+    }
+
+    .login-form input:focus {
+      outline: none;
+      border-color: #ffb000;
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 10px rgba(255, 176, 0, 0.2);
+    }
+
+    .login-btn {
+      background: linear-gradient(135deg, #ffb000, #ff8800);
+      color: black;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 176, 0, 0.3);
+    }
+
+    .login-footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .login-footer a {
+      color: #ffb000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .login-footer a:hover {
+      text-decoration: underline;
+    }
+
+    .login-divider {
+      text-align: center;
+      margin: 20px 0;
+      color: #555;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-wrapper">
+    <div class="login-container">
+
+      <div class="login-header">
+        <div class="login-logo" style="font-size: 60px; margin-bottom: 15px; text-align: center;">
+          <img src="images/logo.png" alt="MotoPool Logo" style="width: 80px; height: auto;">
+        </div>
+        <h1>Welcome to <span style="color: #ffb000;">Moto</span><span style="color: white;">Pool</span></h1>
+        <p>Ride Together, Save Together</p>
+      </div>
+
+      <form id="loginForm" class="login-form">
+
+        <input
+          type="email"
+          id="email"
+          placeholder="📧 Email Address"
+          required
+        >
+
+        <input
+          type="password"
+          id="password"
+          placeholder="🔒 Password"
+          required
+        >
+
+        <button type="submit" class="login-btn">
+          Login to Account
+        </button>
+
+      </form>
+
+      <div class="login-divider">
+        Don't have an account?
+      </div>
+
+      <div class="login-footer">
+        <a href="signup.html">Create an account here</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+
+    document
+      .getElementById("loginForm")
+      .addEventListener("submit", async (e) => {
+
+        e.preventDefault();
+
+        const loginData = {
+          email: document.getElementById("email").value,
+          password: document.getElementById("password").value
+        };
+
+        try {
+          const response = await fetch(
+            "https://motopool-backend.onrender.com/login",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(loginData)
+            }
+          );
+
+          const data = await response.json();
+
+          if (response.ok) {
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user", JSON.stringify(data.user));
+            window.location.href = "profile.html";
+          } else {
+            alert("Error: " + data.message);
+          }
+        } catch (error) {
+          alert("Error: " + error.message);
+        }
+
+      });
+
+  </script>
+
+</body>
+</html>
+
+</body>
+</html>

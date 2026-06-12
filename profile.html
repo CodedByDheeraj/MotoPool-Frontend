@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Dashboard | MotoPool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="blur blur1"></div>
+  <div class="blur blur2"></div>
+
+<nav class="navbar">
+
+  <div class="logo">
+
+    <div class="bike-icon">
+
+      <img src="images/logo.png" alt="logo">
+
+    </div>
+
+    <div class="logo-text">
+
+      <h2>
+
+        <span class="white-text">Moto</span>
+
+        <span class="yellow-text">Pool</span>
+
+      </h2>
+
+      <p>Ride Together</p>
+
+    </div>
+
+  </div>
+
+  <ul class="nav-links">
+
+    <li>
+
+      <a href="index.html">Home</a>
+
+    </li>
+
+    <li>
+
+      <a href="profile.html">Profile</a>
+
+    </li>
+
+  </ul>
+
+</nav>
+
+  <section class="dashboard-section">
+    <div class="dashboard-container">
+      
+      <div class="profile-header">
+        <div class="profile-avatar">
+          <img src="images/profile.png" alt="Profile">
+        </div>
+        <div class="profile-info">
+          <h1 id="userName"></h1>
+          <p class="profile-status" id="userEmail"></p>
+          <div class="profile-stats">
+            <div class="stat-box">
+             <h3 id="rideCount">0</h3> 
+              <p>Rides Given</p>
+            </div>
+            <div class="stat-box">
+              <h3 id="totalEarned">₹0</h3>
+              <p>Earned</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-content">
+        <div class="section-title">
+          <h2>My Active Rides</h2>
+          <div class="button-group">
+            <button class="icon-btn primary-btn" onclick="window.location.href='offer.html'">📤 Post Ride</button>
+            <button class="icon-btn secondary-btn" onclick="window.location.href='find.html'">🔍 Join Ride</button>
+          </div>
+        </div>
+
+        <div class="filter-tabs">
+          <button class="filter-btn active" onclick="filterRides('all')" id="filterAll">All Rides</button>
+          <button class="filter-btn" onclick="filterRides('posted')" id="filterPosted">Posted</button>
+          <button class="filter-btn" onclick="filterRides('joined')" id="filterJoined">Joined</button>
+        </div>
+
+        <div class="dashboard-ride-list" id="rideList">
+        </div>
+
+     
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+<script>
+
+if(!localStorage.getItem("user")){
+
+  window.location.href = "login.html";
+
+}
+
+</script>
+
+  <script src="script.js"></script>
+
+<script>
+
+const currentUser =
+JSON.parse(localStorage.getItem("user"));
+
+if(currentUser){
+
+  document.getElementById("userName").textContent =
+  currentUser.name;
+
+  document.getElementById("userEmail").textContent =
+  currentUser.email;
+
+}
+
+</script>
+
+
+<button id="logoutBtn" class="danger-btn">
+  Logout
+</button>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ride Published | MotoPool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <section class="success-section">
+    <div class="success-box">
+
+      <div class="premium-success-header">
+        <div class="success-badge">✓</div>
+        <h1>Your Ride is Live.</h1>
+        <p>Thanks for sharing your commute with MotoPool 🚀</p>
+      </div>
+
+      <div class="ride-summary-card" id="rideSummary"></div>
+
+      <div class="secondary-actions">
+        <button class="icon-btn" id="shareBtn">
+          📤 Share
+        </button>
+        <button class="icon-btn" id="editBtn">
+          ✏️ Edit
+        </button>
+      </div>
+
+      <div class="primary-actions">
+        <a href="profile.html" class="offer-btn btn-large" id="viewMyRidesBtn">View My Rides</a>
+        <a href="index.html" class="find-btn btn-large">Back to Home</a>
+      </div>
+
+    </div>
+  </section>
+
+<script>
+
+if(!localStorage.getItem("user")){
+
+  window.location.href = "login.html";
+
+}
+
+</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ride Joined | MotoPool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <div class="bike-icon">
+        <img src="images/logo.png" alt="logo">
+      </div>
+      <div class="logo-text">
+        <h2>
+          <span class="white-text">Moto</span><span class="yellow-text">Pool</span>
+        </h2>
+        <p>Ride Together</p>
+      </div>
+    </div>
+
+
+  <ul class="nav-links">
+
+    <li>
+
+      <a href="index.html">Home</a>
+
+    </li>
+
+    <li>
+
+      <a href="profile.html">Profile</a>
+
+    </li>
+
+  </ul>
+  </nav>
+
+  <section class="success-section">
+    <div class="success-box">
+
+      <div class="premium-success-header">
+        <div class="success-badge" style="background: #00d4ff;">✓</div>
+        <h1>You're All Set!</h1>
+        <p>You've successfully joined a MotoPool ride 🏍️</p>
+      </div>
+
+      <div class="ride-summary-card" id="rideSummary"></div>
+
+      <div class="rider-message-section">
+        <h3>Connect with Rider</h3>
+        <div class="message-options">
+          <button class="icon-btn primary-btn" id="callRiderBtn">
+            📞 Call Rider
+          </button>
+          <button class="icon-btn secondary-btn" id="messageRiderBtn">
+            💬 Message Rider
+          </button>
+        </div>
+      </div>
+
+      <div class="primary-actions">
+        <a href="profile.html" class="offer-btn btn-large">View My Rides</a>
+        <a href="index.html" class="find-btn btn-large">Back to Home</a>
+      </div>
+
+    </div>
+  </section>
+
+<script>
+
+if(!localStorage.getItem("user")){
+
+  window.location.href = "login.html";
+
+}
+
+</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="script.js"></script>
+
+  <script>
+    let rideDetails = {};
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Fire confetti
+      if (typeof confetti === "function") {
+        confetti({
+          particleCount: 150,
+          spread: 80,
+          origin: { y: 0.6 },
+          colors: ['#00d4ff', '#ff8800', '#ffffff']
+        });
+      }
+
+      // Load ride details
+      const params = new URLSearchParams(window.location.search);
+      const summaryCard = document.getElementById("rideSummary");
+
+      if (params.has("pickup") && summaryCard) {
+        rideDetails = {
+          riderName: params.get("riderName"),
+          pickup: params.get("pickup"),
+          drop: params.get("drop"),
+          date: params.get("date"),
+          time: params.get("time"),
+          price: params.get("price"),
+          riderId: params.get("riderId")
+        };
+
+        summaryCard.innerHTML = `
+          <p>🏍️ <span>Rider:</span> ${rideDetails.riderName}</p>
+          <p>📍 <span>Route:</span> ${rideDetails.pickup} → ${rideDetails.drop}</p>
+          <p>📅 <span>When:</span> ${rideDetails.date} at ${rideDetails.time}</p>
+          <p>💸 <span>Fare:</span> ₹${rideDetails.price}</p>
+        `;
+      }
+
+      // Message button - redirect to inbox
+      document.getElementById("messageRiderBtn").addEventListener("click", () => {
+        if (rideDetails.riderId) {
+          openInbox(rideDetails.riderId, rideDetails.riderName, 'pillion');
+        } else {
+          alert("Unable to message rider at this time.");
+        }
+      });
+
+      // Call button - check time
+      document.getElementById("callRiderBtn").addEventListener("click", () => {
+        checkAndShowRiderNumber(rideDetails);
+      });
+
+      // Update navbar visibility
+      updateNavBar();
+    });
+
+    function checkAndShowRiderNumber(rideDetails) {
+      const rideDateTime = new Date(`${rideDetails.date}T${rideDetails.time}`);
+      const now = new Date();
+      
+      // 1 hour = 3600000 milliseconds
+      const oneHourBefore = rideDateTime.getTime() - 3600000;
+      const rideStarted = rideDateTime.getTime();
+      
+      if (now.getTime() >= oneHourBefore) {
+        alert("Rider's number:\n\n📱 +91-XXXXXX7890\n\nCalling rider now...");
+      } else {
+        const hoursLeft = Math.ceil((oneHourBefore - now.getTime()) / 3600000);
+        alert(`Call available ${hoursLeft} hour(s) before ride starts!`);
+      }
+    }
+
+    function updateNavBar() {
+      const user = localStorage.getItem("user");
+      if (user) {
+        document.getElementById("userNavItem").style.display = "none";
+        document.getElementById("findNavItem").style.display = "none";
+        document.getElementById("inboxNavItem").style.display = "none";
+        document.getElementById("loginNavItem").style.display = "none";
+        document.getElementById("logoutNavItem").style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>

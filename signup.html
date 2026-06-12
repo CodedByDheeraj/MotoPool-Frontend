@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Signup | MotoPool</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .signup-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: radial-gradient(circle at top left, rgba(255,176,0,0.1), transparent 25%),
+                  radial-gradient(circle at bottom right, rgba(255,120,0,0.05), transparent 30%),
+                  #0b0b0b;
+    }
+
+    .signup-container {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .signup-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .signup-header h1 {
+      color: white;
+      font-size: 32px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, white, #ffb000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .signup-header p {
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .profile-photo-upload {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .photo-preview {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      border: 3px solid #ffb000;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      object-fit: cover;
+      box-shadow: 0 0 20px rgba(255, 176, 0, 0.2);
+    }
+
+    .photo-preview.empty {
+      background: rgba(255, 176, 0, 0.2);
+      color: #ffb000;
+      font-size: 40px;
+    }
+
+    .signup-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .form-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .form-group input {
+      flex: 1;
+    }
+
+    .signup-form input,
+    .signup-form select {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 12px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+      transition: 0.3s;
+    }
+
+    .signup-form input::placeholder,
+    .signup-form select {
+      color: #888;
+    }
+
+    .signup-form input:focus,
+    .signup-form select:focus {
+      outline: none;
+      border-color: #ffb000;
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 10px rgba(255, 176, 0, 0.2);
+    }
+
+    .signup-form select {
+      cursor: pointer;
+    }
+
+    .signup-form select option {
+      background: #1a1a1a;
+      color: white;
+    }
+
+    .photo-upload-label {
+      display: inline-block;
+      background: rgba(255, 176, 0, 0.2);
+      border: 1px dashed #ffb000;
+      color: #ffb000;
+      padding: 8px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .photo-upload-label:hover {
+      background: rgba(255, 176, 0, 0.3);
+    }
+
+    #photoInput {
+      display: none;
+    }
+
+    .signup-btn {
+      background: linear-gradient(135deg, #ffb000, #ff8800);
+      color: black;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    .signup-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 176, 0, 0.3);
+    }
+
+    .signup-footer {
+      text-align: center;
+      margin-top: 20px;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .signup-footer a {
+      color: #ffb000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .signup-footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signup-wrapper">
+    <div class="signup-container">
+
+      <div class="signup-header">
+        <h1>Create Your Account</h1>
+        <p>Join MotoPool and start riding</p>
+      </div>
+
+      <form id="signupForm" class="signup-form">
+
+        <div class="profile-photo-upload">
+          <img id="photoPreview" class="photo-preview empty" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ctext x='50%' y='50%' text-anchor='middle' dy='.3em' font-size='40' fill='%23ffb000'%3E👤%3C/text%3E%3C/svg%3E" alt="Profile">
+          <label for="photoInput" class="photo-upload-label">
+            📸 Upload Photo
+          </label>
+          <input type="file" id="photoInput" accept="image/*">
+        </div>
+
+        <input
+          type="text"
+          id="name"
+          placeholder="Full Name"
+          required
+        >
+
+        <div class="form-group">
+          <input
+            type="number"
+            id="age"
+            placeholder="Age"
+            min="18"
+            max="100"
+            required
+          >
+          <select id="gender" required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <input
+          type="tel"
+          id="phone"
+          placeholder="Phone Number"
+          pattern="[0-9]{10}"
+          required
+        >
+
+        <input
+          type="email"
+          id="email"
+          placeholder="Email"
+          required
+        >
+
+        <input
+          type="password"
+          id="password"
+          placeholder="Password"
+          required
+        >
+
+        <button type="submit" class="signup-btn">
+          Create Account
+        </button>
+
+      </form>
+
+      <div class="signup-footer">
+        Already have an account? <a href="login.html">Login here</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    let profilePhotoBase64 = "";
+
+    document.getElementById("photoInput").addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          profilePhotoBase64 = event.target.result;
+          document.getElementById("photoPreview").src = profilePhotoBase64;
+          document.getElementById("photoPreview").classList.remove("empty");
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    document
+      .getElementById("signupForm")
+      .addEventListener("submit", async (e) => {
+
+        e.preventDefault();
+
+        const userData = {
+          name: document.getElementById("name").value,
+          age: document.getElementById("age").value,
+          gender: document.getElementById("gender").value,
+          phone: document.getElementById("phone").value,
+          email: document.getElementById("email").value,
+          password: document.getElementById("password").value,
+          profilePhoto: profilePhotoBase64
+        };
+
+        try {
+          const response = await fetch(
+            "https://motopool-backend.onrender.com/signup",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json"
+              },
+              body: JSON.stringify(userData)
+            }
+          );
+
+          const data = await response.json();
+
+          if (response.ok) {
+            alert("Account created successfully! Redirecting to login...");
+            window.location.href = "login.html";
+          } else {
+            alert("Error: " + data.message);
+          }
+        } catch (error) {
+          alert("Error: " + error.message);
+        }
+
+      });
+
+  </script>
+
+</body>
+</html>

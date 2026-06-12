@@ -1,0 +1,1768 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  color: white;
+
+  background:
+
+  radial-gradient(
+
+    circle at top left,
+
+    rgba(255,176,0,0.12),
+
+    transparent 25%
+
+  ),
+
+  radial-gradient(
+
+    circle at bottom right,
+
+    rgba(255,120,0,0.08),
+
+    transparent 30%
+
+  ),
+
+  #0b0b0b;
+
+  overflow-x: hidden;
+
+}
+
+
+/* Navbar */
+
+.navbar{
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 18px 50px;
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 1000;
+
+  background: rgba(255,255,255,0.05);
+
+  backdrop-filter: blur(12px);
+
+  -webkit-backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+
+}
+
+/* Logo Styling */
+
+.logo{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bike-icon{
+
+  width: 60px;
+
+  height: 60px;
+
+  border-radius: 50%;
+
+  overflow: hidden;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  box-shadow: 0 0 20px rgba(255,165,0,0.5);
+
+  animation: floatLogo 5s ease-in-out infinite;
+
+  transition: 0.3s;
+
+cursor: pointer;
+
+}
+
+.white-text{
+
+  color: white;
+
+}
+
+.yellow-text{
+
+  color: orange;
+
+}
+
+/* Hover Effect */
+
+.bike-icon:hover img{
+
+  transform: scale(1.1);
+
+}
+
+.bike-icon img{
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+  transition: transform 0.3s ease;
+
+}
+
+.logo-text h2{
+  font-size: 28px;
+  color: white;
+}
+
+.logo-text p{
+  font-size: 12px;
+  color: #aaa;
+
+  letter-spacing: 2px;
+}
+
+.nav-links{
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.nav-links a{
+
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 17px;
+
+  font-weight: 500;
+
+  position: relative;
+
+  transition: 0.3s;
+
+}
+
+
+.nav-links a::after{
+
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  bottom: -5px;
+
+  width: 0%;
+
+  height: 2px;
+
+  background: orange;
+
+  transition: 0.3s;
+
+}
+
+.nav-links a:hover::after{
+
+  width: 100%;
+
+}
+
+.nav-links a:hover{
+  color: orange;
+}
+
+/* Hero Section */
+
+.hero{
+
+  min-height: 90vh;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 50px;
+
+  gap: 50px;
+
+  position: relative;
+
+  overflow: hidden;
+
+}
+
+/* Left Side */
+
+.hero-left{
+
+  flex: 1;
+
+}
+
+.hero-left h1{
+
+  font-size: 80px;
+
+  line-height: 1.1;
+
+  margin-bottom: 20px;
+
+}
+
+.hero-left span{
+
+  color: orange;
+
+}
+
+.hero-left p{
+
+  font-size: 24px;
+
+  color: #ccc;
+
+  margin-bottom: 40px;
+
+}
+
+.hero-title{
+
+  opacity: 0;
+
+  transform: translateY(40px);
+
+  animation: heroReveal 1.2s ease forwards;
+
+}
+
+
+/* Right Side */
+
+.hero-right{
+
+  flex: 1;
+
+  display: flex;
+
+  justify-content: center;
+
+}
+
+.hero-right img{
+
+  width: 100%;
+
+  max-width: 650px;
+
+  border-radius: 30px;
+
+  animation: heroFloat 5s ease-in-out infinite;
+
+  opacity: 0.96;
+
+  mix-blend-mode: screen;
+
+  box-shadow:
+
+  0 0 40px rgba(255,165,0,0.12);
+
+  filter:
+
+  drop-shadow(0 0 18px rgba(255,176,0,0.18));
+
+}
+
+/* Buttons */
+
+.buttons{
+
+  display: flex;
+
+  gap: 20px;
+
+}
+
+button{
+
+  padding: 15px 30px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  font-size: 18px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+
+  position: relative;
+
+  overflow: hidden;
+
+}
+
+/* Offer Button */
+
+.offer-btn{
+
+  background: linear-gradient(
+
+    135deg,
+
+    #ffb000,
+
+    #ff8800
+
+  );
+
+  color: black;
+
+  box-shadow:
+
+  0 4px 15px rgba(255,176,0,0.25);
+
+}
+
+/* Find Button */
+
+.find-btn{
+
+  background: rgba(255,255,255,0.1);
+
+  color: white;
+
+  border: 1px solid rgba(255,255,255,0.15);
+
+  backdrop-filter: blur(10px);
+
+}
+
+/* Hover Effect */
+
+button:hover{
+
+  transform: translateY(-4px) scale(1.03);
+
+}
+
+/* Click Effect */
+
+button:active{
+
+  transform: scale(0.96);
+
+}
+
+/* Glow Hover */
+
+.offer-btn:hover{
+
+  box-shadow:
+
+  0 8px 25px rgba(255,176,0,0.4);
+
+}
+
+.find-btn:hover{
+
+  background: rgba(255,255,255,0.18);
+
+}
+
+
+/* Features */
+
+.features{
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+
+  padding: 80px 40px;
+
+  flex-wrap: wrap;
+}
+
+.card{
+  background: #1f1f1f;
+
+  padding: 30px;
+  border-radius: 15px;
+
+  width: 300px;
+
+  text-align: center;
+
+  transition: 0.3s;
+}
+
+.card:hover{
+  transform: translateY(-10px);
+}
+
+.card h2{
+  margin-bottom: 15px;
+}
+
+
+/* Footer */
+
+footer{
+  text-align: center;
+  padding: 30px;
+
+  background: black;
+  color: #aaa;
+}
+
+/* Animation */
+
+@keyframes floatLogo {
+
+  0%{
+
+    transform: translateY(0px);
+
+  }
+
+  50%{
+
+    transform: translateY(-3px);
+
+  }
+
+  100%{
+
+    transform: translateY(0px);
+
+  }
+
+}
+/* Scroll Animation */
+
+.hidden{
+
+  opacity: 0;
+
+  transform: translateY(40px);
+
+  transition: all 1s ease;
+
+}
+
+.show{
+
+  opacity: 1;
+
+  transform: translateY(0);
+
+}
+
+/* Ripple Effect */
+
+.ripple{
+
+  position: absolute;
+
+  width: 20px;
+
+  height: 20px;
+
+  background: rgba(255,255,255,0.6);
+
+  border-radius: 50%;
+
+  transform: scale(0);
+
+  animation: rippleEffect 0.6s linear;
+
+  pointer-events: none;
+
+}
+
+@keyframes rippleEffect{
+
+  to{
+
+    transform: scale(12);
+
+    opacity: 0;
+
+  }
+
+}
+
+@keyframes heroReveal{
+
+  to{
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+  }
+
+}
+
+@keyframes heroFloat {
+
+  0%{
+
+    transform: translateY(0px);
+
+  }
+
+  50%{
+
+    transform: translateY(-12px);
+
+  }
+
+  100%{
+
+    transform: translateY(0px);
+
+  }
+
+}
+
+/* Background Blur Lights */
+
+.blur{
+
+  position: absolute;
+
+  border-radius: 50%;
+
+  filter: blur(120px);
+
+  z-index: -1;
+
+}
+
+
+.blur1{
+
+  width: 300px;
+  height: 300px;
+
+  background: rgba(255,176,0,0.18);
+
+  top: 100px;
+  left: -100px;
+
+}
+
+
+.blur2{
+
+  width: 250px;
+  height: 250px;
+
+  background: rgba(255,120,0,0.12);
+
+  bottom: 50px;
+  right: -80px;
+
+}
+
+/* Hero Gradient Lighting */
+
+.hero::before{
+
+  content: "";
+
+  position: absolute;
+
+  width: 500px;
+
+  height: 500px;
+
+  background:
+
+  radial-gradient(
+
+    circle,
+
+    rgba(255,176,0,0.18),
+
+    transparent 70%
+
+  );
+
+  top: -150px;
+
+  right: -150px;
+
+  z-index: -1;
+
+  filter: blur(60px);
+
+}
+
+/* Responsive Design */
+
+@media (max-width: 900px){
+
+  .hero{
+
+    flex-direction: column;
+
+    text-align: center;
+
+    padding: 60px 20px;
+
+  }
+
+  .hero-left{
+
+    margin-bottom: 40px;
+
+  }
+
+  .hero-right img{
+
+    width: 90%;
+
+    max-width: 400px;
+
+  }
+
+  .buttons{
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+  }
+
+  .navbar{
+
+    padding: 18px 20px;
+
+  }
+
+}
+
+/* =========================================
+   OFFER RIDE PAGE (PREMIUM UPGRADE)
+   ========================================= */
+
+/* =========================================
+   FIND RIDE PAGE
+   ========================================= */
+
+.find-section {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 50px 20px;
+}
+
+.find-section h1 {
+  font-size: 42px;
+  margin-bottom: 24px;
+  text-align: center;
+  background: linear-gradient(135deg, #ffe29f, #ffb000, #ff6a00);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.ride-search-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto auto;
+  gap: 14px;
+  align-items: end;
+  margin-bottom: 28px;
+  padding: 18px;
+  background: rgba(15, 15, 15, 0.6);
+  border: 1px solid rgba(255, 176, 0, 0.2);
+  border-radius: 16px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.search-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.search-field label {
+  color: #aaa;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.search-field input {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
+  font-size: 15px;
+  outline: none;
+}
+
+.search-field input:focus {
+  border-color: rgba(255, 176, 0, 0.6);
+  box-shadow: 0 0 14px rgba(255, 176, 0, 0.12);
+}
+
+.search-btn {
+  padding: 13px 20px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #ffb000, #ff8800);
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 176, 0, 0.28);
+}
+
+.ride-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.ride-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.ride-card-find {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: center;
+  padding: 20px;
+}
+
+.ride-card-find-left {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ride-card-find-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  min-width: 100px;
+}
+
+.rider-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffb000;
+  margin-bottom: 8px;
+}
+
+.rider-label {
+  font-size: 12px;
+  color: #ffb000;
+  font-weight: bold;
+  margin: 0;
+}
+
+.rider-age {
+  font-size: 12px;
+  color: #aaa;
+  margin: 5px 0 0 0;
+}
+
+.rider-rating {
+  font-size: 12px;
+  color: #ffb000;
+  margin: 3px 0 0 0;
+  font-weight: bold;
+}
+
+.ride-card h2 {
+  color: #ffb000;
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+
+.ride-card p {
+  color: #ddd;
+  margin-bottom: 10px;
+}
+
+.join-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #ffb000, #ff8800);
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.join-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 176, 0, 0.26);
+}
+
+.secondary-btn:disabled {
+  width: 100%;
+  margin-top: 12px;
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+@media (max-width: 760px) {
+  .ride-search-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+.offer-section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+}
+
+.offer-container {
+  width: 100%;
+  max-width: 550px; /* Slightly wider for the two-column layout */
+  background: rgba(15, 15, 15, 0.6); /* Darker, sleeker background */
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 176, 0, 0.2);
+  border-radius: 24px;
+  padding: 50px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 176, 0, 0.05);
+}
+
+.offer-container h1 {
+  font-size: 46px; /* Slightly larger to make it a true centerpiece */
+  margin-bottom: 12px;
+  text-align: center; /* Centers the title */
+  
+  /* Richer, deeper gold gradient (removed the bright white) */
+  background: linear-gradient(135deg, #ffe29f, #ffb000, #ff6a00);
+  -webkit-background-clip: text;
+  background-clip: text; 
+  -webkit-text-fill-color: transparent;
+  color: transparent; 
+  
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  
+  /* Adds a subtle premium glow behind the text */
+  filter: drop-shadow(0px 4px 15px rgba(255, 176, 0, 0.35));
+}
+
+.offer-container p {
+  color: #a8a8a8; /* Slightly darker grey so it doesn't distract from the title */
+  font-size: 14px; /* Shrunk down for a sleeker look */
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: center; /* Centers the paragraph */
+  margin-bottom: 40px;
+  padding: 0 15px; /* Pulls the edges in slightly */
+}
+
+/* --- Form Layout & Typography --- */
+.ride-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* More breathing room */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.form-group label {
+  font-size: 14px;
+  color: #aaa;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.input-group {
+  display: flex;
+  gap: 20px;
+}
+
+/* --- Premium Inputs --- */
+.ride-form input[type="text"],
+.ride-form input[type="date"],
+.ride-form input[type="time"] {
+  width: 100%;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  color: white;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.ride-form input::placeholder {
+  color: #666;
+}
+
+/* The Magic Glow on Focus */
+.ride-form input:focus {
+  border-color: rgba(255, 176, 0, 0.6);
+  background: rgba(255, 176, 0, 0.05);
+  box-shadow: 0 0 15px rgba(255, 176, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Custom Calendar/Clock Icon Color */
+::-webkit-calendar-picker-indicator {
+  filter: invert(1) sepia(100%) saturate(500%) hue-rotate(30deg); /* Makes the icons gold */
+  cursor: pointer;
+}
+
+/* --- Premium Fare Slider --- */
+.fare-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fare-display {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffb000;
+}
+
+.premium-slider {
+  width: 100%;
+  appearance: none;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  outline: none;
+  margin-top: 10px;
+}
+
+.premium-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #ffb000;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255, 176, 0, 0.5);
+  transition: 0.2s ease;
+}
+
+.premium-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* --- Submit Button --- */
+.offer-submit-btn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 18px;
+  border: none;
+  border-radius: 14px;
+  font-size: 18px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #ffb000, #ff8800);
+  color: black;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(255, 176, 0, 0.2);
+}
+
+.offer-submit-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(255, 176, 0, 0.4);
+}
+
+
+
+/* =========================================
+   SUCCESS PAGE STYLES 
+   ========================================= */
+
+.success-section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.success-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  border-radius: 30px;
+  padding: 50px;
+  text-align: center;
+  width: 100%;
+  max-width: 600px; /* Constrains the main box */
+  box-shadow: 0 0 40px rgba(255, 176, 0, 0.08);
+}
+
+.success-box h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.success-box p {
+  color: #ccc;
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+.success-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* --- Ride Summary Card --- */
+.ride-summary-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 176, 0, 0.3);
+  border-radius: 16px;
+  padding: 20px;
+  margin: 0 auto 30px auto;
+  max-width: 400px;
+  text-align: left;
+}
+
+/* FIX: This hides the card completely if JavaScript hasn't loaded data into it */
+.ride-summary-card:empty {
+  display: none;
+}
+
+.ride-summary-card p {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: white;
+}
+
+.ride-summary-card span {
+  color: orange;
+  font-weight: bold;
+}
+
+/* --- Secondary Action Pill Buttons --- */
+.secondary-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: -15px; 
+}
+
+.icon-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ddd;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Legacy button classes (kept just in case you use them elsewhere) */
+.share-btn {
+  background: #00c853 !important; 
+  color: white !important;
+  box-shadow: 0 4px 15px rgba(0, 200, 83, 0.2) !important;
+}
+
+.edit-btn {
+  border-color: #ff5252 !important; 
+  color: #ff5252 !important;
+}
+
+.edit-btn:hover {
+  background: rgba(255, 82, 82, 0.1) !important;
+}
+
+/* --- Primary Navigation Buttons --- */
+.primary-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 30px;
+  
+  /* FIX: These lines stop the buttons from stretching across the entire screen */
+  max-width: 400px; 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-large {
+  width: 100%;
+  padding: 16px;
+  font-size: 18px;
+  text-align: center;
+  box-sizing: border-box;
+  text-decoration: none; 
+  display: block; 
+}
+
+/* --- Premium Success Typography --- */
+.premium-success-header {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.success-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  background: rgba(0, 200, 83, 0.15);
+  color: #00c853; 
+  border-radius: 50%;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  border: 1px solid rgba(0, 200, 83, 0.4);
+  box-shadow: 0 0 25px rgba(0, 200, 83, 0.25);
+}
+
+.premium-success-header h1 {
+  font-size: 34px;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #ffffff, #ffb000);
+  -webkit-background-clip: text;
+  background-clip: text; 
+  -webkit-text-fill-color: transparent;
+  color: transparent; 
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.premium-success-header p {
+  color: #b3b3b3;
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 0;
+}
+
+/* =========================================
+   PROFILE & DASHBOARD PAGE
+   ========================================= */
+
+.dashboard-section {
+  padding: 50px 20px;
+  display: flex;
+  justify-content: center;
+  min-height: 80vh;
+}
+
+.dashboard-container {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* --- Profile Header --- */
+.profile-header {
+  background: rgba(15, 15, 15, 0.6);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 176, 0, 0.2);
+  border-radius: 24px;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #ffb000;
+  padding: 4px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(255, 176, 0, 0.3);
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-info h1 {
+  font-size: 32px;
+  background: linear-gradient(135deg, #ffe29f, #ffb000);
+  -webkit-background-clip: text;
+  background-clip: text; 
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 5px;
+}
+
+.profile-status {
+  color: #00c853; /* Success green */
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 20px;
+}
+
+.stat-box {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.stat-box h3 {
+  font-size: 22px;
+  color: white;
+}
+
+.stat-box p {
+  font-size: 12px;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* --- Dashboard Content --- */
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 15px;
+}
+
+.section-title h2 {
+  font-size: 24px;
+  color: white;
+}
+
+/* Dashboard Ride Cards */
+.dashboard-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.ride-card-with-profile {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: stretch;
+  padding: 0;
+}
+
+.ride-card-left {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+}
+
+.ride-card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  min-width: 150px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.other-user-profile {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-avatar-small {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #ffb000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 176, 0, 0.2);
+}
+
+.profile-avatar-small img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.other-user-profile h4 {
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  margin: 5px 0 0 0;
+  word-wrap: break-word;
+  max-width: 130px;
+}
+
+.user-role {
+  font-size: 12px;
+  color: #ffb000;
+  font-weight: bold;
+  margin: 0;
+}
+
+.no-user {
+  text-align: center;
+  opacity: 0.6;
+}
+
+.no-user p {
+  font-size: 13px;
+  color: #aaa;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 10px;
+}
+
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status-badge.upcoming {
+  background: rgba(255, 176, 0, 0.15);
+  color: #ffb000;
+  border: 1px solid rgba(255, 176, 0, 0.4);
+}
+
+.status-badge.live {
+  background: rgba(0, 200, 83, 0.15);
+  color: #00c853;
+  border: 1px solid rgba(0, 200, 83, 0.4);
+}
+
+.card-body p {
+  color: white;
+  margin-bottom: 8px;
+}
+
+.card-body span {
+  color: #ffb000;
+  font-weight: bold;
+}
+
+.card-footer {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.secondary-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.danger-btn {
+  background: rgba(255, 82, 82, 0.1);
+  color: #ff5252;
+  border: 1px solid rgba(255, 82, 82, 0.3);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.danger-btn:hover {
+  background: rgba(255, 82, 82, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+/* --- Empty State --- */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  color: #888;
+}
+
+.empty-state h3 {
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.empty-state p {
+  margin-bottom: 20px;
+}
+
+.btn-primary-small {
+  background: #ffb000;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.primary-btn {
+  background: #ffb000 !important;
+  color: black !important;
+  font-weight: bold;
+  border: none !important;
+}
+
+.primary-btn:hover {
+  background: #ff9800 !important;
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 176, 0, 0.3);
+}
+
+.secondary-btn {
+  background: rgba(0, 212, 255, 0.2) !important;
+  color: #00d4ff !important;
+  border: 1px solid rgba(0, 212, 255, 0.5) !important;
+  font-weight: bold;
+}
+
+.secondary-btn:hover {
+  background: rgba(0, 212, 255, 0.3) !important;
+  color: #00d4ff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+}
+
+/* Rides Section */
+.rides-section {
+  margin-bottom: 30px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 15px;
+  border-left: 4px solid rgba(255, 255, 255, 0.1);
+}
+
+.rides-section h3 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Filter Tabs */
+.filter-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.filter-btn {
+  padding: 10px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: #aaa;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ddd;
+}
+
+.filter-btn.active {
+  background: #ffb000;
+  color: black;
+  border-color: #ffb000;
+  box-shadow: 0 4px 12px rgba(255, 176, 0, 0.3);
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #1a1a1a;
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.modal-content h2 {
+  color: white;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.modal-content textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  margin-bottom: 20px;
+  resize: vertical;
+}
+
+.modal-content textarea::placeholder {
+  color: #666;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 20px;
+}
+
+.close:hover,
+.close:focus {
+  color: white;
+}
+
+/* Rider Message Section */
+.rider-message-section {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 20px 0;
+  text-align: center;
+}
+
+.rider-message-section h3 {
+  color: white;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.message-options {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.message-options .icon-btn {
+  flex: 1;
+  max-width: 200px;
+}
+.chat-header{
+
+    background:#1f2937;
+
+    color:white;
+
+    padding:15px 20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    border-bottom:1px solid #374151;
+}
+
+.header-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+.chat-logo{
+
+    width:45px;
+
+    height:45px;
+
+    border-radius:50%;
+}
+
+.header-left h3{
+
+    margin:0;
+
+    color:white;
+}
+
+.header-left p{
+
+    font-size:12px;
+
+    color:rgba(255,255,255,.8);
+}
+
+.back-btn{
+
+    background:#ffb000;
+
+    color:black;
+
+    border:none;
+
+    padding:8px 14px;
+
+    font-size:14px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}

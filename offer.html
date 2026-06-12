@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Offer Ride | MotoPool</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <!-- Navbar -->
+
+  <nav class="navbar">
+
+    <div class="logo">
+
+      <div class="bike-icon">
+
+        <img src="images/logo.png" alt="logo">
+
+      </div>
+
+      <div class="logo-text">
+
+        <h2>
+
+          <span class="white-text">Moto</span><span class="yellow-text">Pool</span>
+
+        </h2>
+
+        <p>Ride Together</p>
+
+      </div>
+
+    </div>
+
+
+
+  <ul class="nav-links">
+
+    <li>
+
+      <a href="index.html">Home</a>
+
+    </li>
+
+    <li>
+
+      <a href="profile.html">Profile</a>
+
+    </li>
+
+  </ul>
+
+  </nav>
+
+  <!-- Offer Ride Section -->
+
+<section class="offer-section">
+  <div class="offer-container">
+    <h1>Post a Ride</h1>
+    <p>Set your route, schedule, and fare to start sharing your commute.</p>
+
+    <form class="ride-form" onsubmit="offerRide(event)">
+      
+      <div class="form-group">
+        <label>Pickup Location</label>
+        <input type="text" id="pickup" placeholder="e.g., Connaught Place" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Drop-off Location</label>
+        <input type="text" id="drop" placeholder="e.g., Cyber City" required>
+      </div>
+
+      <div class="input-group">
+        <div class="form-group">
+          <label>Date</label>
+          <input type="date" id="date" required>
+        </div>
+        <div class="form-group">
+          <label>Time</label>
+          <input type="time" id="time" required>
+        </div>
+      </div>
+
+      <div class="form-group fare-group">
+        <div class="fare-header">
+          <label>Seat Price</label>
+          <span class="fare-display">₹<span id="fareValue">20</span></span>
+        </div>
+        <input type="range" id="fareSlider" class="premium-slider" min="20" max="200" step="10" value="20">
+      </div>
+
+      <button type="submit" class="offer-submit-btn">Publish Ride</button>
+      <a href="index.html" class="find-btn btn-large" style="display: block; text-align: center; margin-top: 10px; padding: 12px; text-decoration: none;">Back to Home</a>
+    </form>
+  </div>
+</section>
+
+<script>
+
+if(!localStorage.getItem("user")){
+
+  window.location.href = "login.html";
+
+}
+
+</script>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>

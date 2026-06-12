@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Find Ride | MotoPool</title>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <!-- Navbar -->
+
+  <nav class="navbar">
+
+    <div class="logo">
+
+      <div class="bike-icon">
+
+        <img src="images/logo.png" alt="logo">
+
+      </div>
+
+      <div class="logo-text">
+
+        <h2>
+
+          <span class="white-text">Moto</span><span class="yellow-text">Pool</span>
+
+        </h2>
+
+        <p>Ride Together</p>
+
+      </div>
+
+    </div>
+
+
+
+  <ul class="nav-links">
+
+    <li>
+
+      <a href="index.html">Home</a>
+
+    </li>
+
+    <li>
+
+      <a href="profile.html">Profile</a>
+
+    </li>
+
+  </ul>
+
+  </nav>
+
+  <!-- Find Ride Section -->
+
+  <section class="find-section">
+
+    <h1>Available Rides</h1>
+
+    <form class="ride-search-form" id="rideSearchForm">
+
+      <div class="search-field">
+        <label for="searchPickup">Pickup</label>
+        <input type="text" id="searchPickup" placeholder="Search pickup city">
+      </div>
+
+      <div class="search-field">
+        <label for="searchDrop">Drop</label>
+        <input type="text" id="searchDrop" placeholder="Search drop city">
+      </div>
+
+      <button type="submit" class="search-btn">Search</button>
+      <button type="button" class="secondary-btn" id="clearSearchBtn">Clear</button>
+
+    </form>
+
+    <div class="ride-cards" id="rideCards">
+
+    </div>
+
+  </section>
+
+<script>
+
+if(!localStorage.getItem("user")){
+
+  window.location.href = "login.html";
+
+}
+
+</script>
+  
+  <script src="script.js"></script>
+
+</body>
+
+</html>
