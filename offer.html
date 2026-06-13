@@ -12,8 +12,6 @@
 
   <link rel="stylesheet" href="style.css">
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLz1Dt8DPVukQoepEVmB1DII7qyT3HDpA&libraries=places"></script>
-
 </head>
 
 <body>
@@ -128,20 +126,58 @@ dateInput.setAttribute("min", today);
 </script>
 
 <script>
-function initAutocomplete() {
-  const pickupInput = document.getElementById("pickup");
-  const dropInput = document.getElementById("drop");
+function setupAutocomplete(inputId) {
+  const input = document.getElementById(inputId);
+  let dropdown = null;
 
-  const options = {
-    componentRestrictions: { country: "in" }, // India only
-    types: ["geocode", "establishment"]
-  };
+  input.addEventListener("input", async function () {
+    const query = input.value.trim();
+    if (query.length < 3) {
+      if (dropdown) dropdown.remove();
+      return;
+    }
 
-  new google.maps.places.Autocomplete(pickupInput, options);
-  new google.maps.places.Autocomplete(dropInput, options);
+    const res = await fetch(
+      `https://api.locationiq.com/v1/autocomplete?key=YOUR_LOCATIONIQ_TOKEN&q=${encodeURIComponent(query)}&countrycodes=in&limit=5`
+    );
+    const results = await res.json();
+
+    if (dropdown) dropdown.remove();
+    dropdown = document.createElement("ul");
+    dropdown.style.cssText = `
+      position: absolute; background: #1a1a1a; border: 1px solid #ffb000;
+      border-radius: 8px; list-style: none; padding: 0; margin: 0;
+      z-index: 1000; width: ${input.offsetWidth}px; max-height: 200px; overflow-y: auto;
+    `;
+
+    results.forEach(place => {
+      const li = document.createElement("li");
+      li.textContent = place.display_name;
+      li.style.cssText = "padding: 10px 14px; color: white; cursor: pointer; font-size: 13px; border-bottom: 1px solid #333;";
+      li.addEventListener("mouseenter", () => li.style.background = "#333");
+      li.addEventListener("mouseleave", () => li.style.background = "transparent");
+      li.addEventListener("click", () => {
+        input.value = place.display_name;
+        dropdown.remove();
+        dropdown = null;
+      });
+      dropdown.appendChild(li);
+    });
+
+    input.parentElement.style.position = "relative";
+    input.parentElement.appendChild(dropdown);
+  });
+
+  document.addEventListener("click", (e) => {
+    if (dropdown && !input.contains(e.target)) {
+      dropdown.remove();
+      dropdown = null;
+    }
+  });
 }
 
-window.addEventListener("load", initAutocomplete);
+setupAutocomplete("pickup");
+setupAutocomplete("drop");
 </script>
 
 </body>
