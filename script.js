@@ -119,16 +119,18 @@ async function offerRide(event) {
       body: JSON.stringify(rideData)
     });
 
+    const data = await response.json();
+
     if (response.ok) {
       // 4. If the server says "Success", redirect using the URL parameters!
       const queryParams = new URLSearchParams(rideData).toString();
       window.location.href = `success.html?${queryParams}`;
     } else {
-      alert("Oops! The server rejected the ride.");
+      alert(data.message || "Oops! The server rejected the ride.");
     }
   } catch (error) {
     console.error("Server error:", error);
-    alert("Could not connect to the server. Make sure your Node terminal is running!");
+    alert("⚠️ Could not connect to the server. Please check your internet connection and try again.");
   }
 }
 
@@ -306,7 +308,7 @@ async function joinRide(rideId, riderName, pickup, drop, date, time, price, ride
 
   } catch (error) {
 
-    alert("Could not join this ride. Make sure your backend server is running.");
+    alert("⚠️ Could not join this ride right now. Please check your internet connection and try again.");
 
   }
 
