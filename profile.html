@@ -60,7 +60,7 @@
       
       <div class="profile-header">
         <div class="profile-avatar">
-          <img src="images/profile.png" alt="Profile">
+          <img id="profilePhoto" src="images/profile.png" alt="Profile">
         </div>
         <div class="profile-info">
           <h1 id="userName"></h1>
@@ -117,17 +117,16 @@ if(!localStorage.getItem("user")){
 
 <script>
 
-const currentUser =
-JSON.parse(localStorage.getItem("user"));
+const currentUser = JSON.parse(localStorage.getItem("user"));
 
 if(currentUser){
+  document.getElementById("userName").textContent = currentUser.name;
+  document.getElementById("userEmail").textContent = currentUser.email;
 
-  document.getElementById("userName").textContent =
-  currentUser.name;
-
-  document.getElementById("userEmail").textContent =
-  currentUser.email;
-
+  // Show the user's own profile photo
+  if(currentUser.profilePhoto) {
+    document.getElementById("profilePhoto").src = currentUser.profilePhoto;
+  }
 }
 
 </script>

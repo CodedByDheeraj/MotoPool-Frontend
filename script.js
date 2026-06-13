@@ -83,22 +83,33 @@ const observer = new IntersectionObserver((entries) => {
 hiddenElements.forEach((el) => observer.observe(el));
 
 async function offerRide(event) {
-  // 1. Stop the page from reloading
   event.preventDefault();
 
-  // 2. Grab the data from the form
-const user =
-JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user"));
 
-const rideData = {
-  userId: user._id,
+  const dateVal = document.getElementById("date").value;
+  const timeVal = document.getElementById("time").value;
 
-  pickup: document.getElementById("pickup").value,
-  drop: document.getElementById("drop").value,
-  date: document.getElementById("date").value,
-  time: document.getElementById("time").value,
-  price: document.getElementById("fareSlider").value
-};
+  // Block past rides — must be at least 15 mins in the future
+  if (dateVal && timeVal) {
+    const rideDateTime = new Date(`${dateVal}T${timeVal}`);
+    const now = new Date();
+    const diffMins = (rideDateTime - now) / (1000 * 60);
+
+    if (diffMins < 15) {
+      alert("⚠️ Ride time must be at least 15 minutes from now. Please choose a future time.");
+      return;
+    }
+  }
+
+  const rideData = {
+    userId: user._id,
+    pickup: document.getElementById("pickup").value,
+    drop: document.getElementById("drop").value,
+    date: dateVal,
+    time: timeVal,
+    price: document.getElementById("fareSlider").value
+  };
 
   try {
     // 3. Send the data to your NOW-RUNNING local server!
@@ -192,8 +203,14 @@ async function loadRides(){
     return;
   }
 
-  // Filter out full rides
-  const availableRides = rides.filter(ride => Number(ride.joinedCount || 0) < 1);
+  // Filter out full rides AND past rides
+  const now = new Date();
+  const availableRides = rides.filter(ride => {
+    if (Number(ride.joinedCount || 0) >= 1) return false; // full
+    if (!ride.date || !ride.time) return true;
+    const rideTime = new Date(`${ride.date}T${ride.time}`);
+    return rideTime > now; // only future rides
+  });
 
   if(availableRides.length === 0){
 
@@ -532,7 +549,9 @@ function displayRides(filterType) {
 
           <div class="card-footer">
             ${isPosted 
-              ? `<button class="secondary-btn" onclick="openInbox('${ride._id}')">💬 Message Pillion</button>` 
+              ? (Number(ride.joinedCount || 0) >= 1 
+                  ? `<button class="secondary-btn" onclick="openInbox('${ride._id}')">💬 Message Pillion</button>` 
+                  : ``)
               : `<button class="secondary-btn" onclick="openInbox('${ride._id}')">💬 Message Rider</button>`
             }
             <button class="danger-btn" onclick="${isPosted ? `deleteRide('${ride._id}')` : `cancelRide('${ride._id}')`}">${isPosted ? 'Delete' : 'Cancel'}</button>
@@ -566,32 +585,26 @@ function displayRides(filterType) {
 
 function getRideStatus(ride){
 
-  const rideTimestamp =
-  getRideTimestamp(ride);
+  const rideTimestamp = getRideTimestamp(ride);
 
   if(rideTimestamp === Infinity){
-
-    return {
-      label: "Upcoming",
-      className: "upcoming"
-    };
-
+    return { label: "Upcoming", className: "upcoming" };
   }
 
-  if(rideTimestamp <= Date.now()){
-
-    return {
-      label: "Live",
-      className: "live"
-    };
-
+  const now = Date.now();
+  
+  // Consider a ride "live" for only 1 hour after start time
+  const ONE_HOUR = 60 * 60 * 1000;
+  
+  if(rideTimestamp <= now && now <= rideTimestamp + ONE_HOUR){
+    return { label: "🟢 Live", className: "live" };
   }
 
-  return {
-    label: "Upcoming",
-    className: "upcoming"
-  };
+  if(rideTimestamp + ONE_HOUR < now){
+    return { label: "Completed", className: "completed" };
+  }
 
+  return { label: "Upcoming", className: "upcoming" };
 }
 
 function compareRideSchedule(firstRide, secondRide){

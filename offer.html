@@ -12,6 +12,8 @@
 
   <link rel="stylesheet" href="style.css">
 
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLz1Dt8DPVukQoepEVmB1DII7qyT3HDpA&libraries=places"></script>
+
 </head>
 
 <body>
@@ -117,6 +119,30 @@ if(!localStorage.getItem("user")){
 </script>
 
   <script src="script.js"></script>
+
+  <script>
+// Set minimum date to today
+const dateInput = document.getElementById("date");
+const today = new Date().toISOString().split("T")[0];
+dateInput.setAttribute("min", today);
+</script>
+
+<script>
+function initAutocomplete() {
+  const pickupInput = document.getElementById("pickup");
+  const dropInput = document.getElementById("drop");
+
+  const options = {
+    componentRestrictions: { country: "in" }, // India only
+    types: ["geocode", "establishment"]
+  };
+
+  new google.maps.places.Autocomplete(pickupInput, options);
+  new google.maps.places.Autocomplete(dropInput, options);
+}
+
+window.addEventListener("load", initAutocomplete);
+</script>
 
 </body>
 

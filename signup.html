@@ -222,13 +222,34 @@
           </select>
         </div>
 
-        <input
-          type="tel"
-          id="phone"
-          placeholder="Phone Number"
-          pattern="[0-9]{10}"
-          required
-        >
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <input
+            type="tel"
+            id="phone"
+            placeholder="10-digit Phone Number"
+            pattern="[0-9]{10}"
+            maxlength="10"
+            required
+            style="flex: 1;"
+          >
+          <button type="button" id="sendOtpBtn" onclick="sendOTP()" style="background: #ffb000; color: black; border: none; padding: 12px 14px; border-radius: 8px; font-weight: bold; cursor: pointer; white-space: nowrap;">
+            Get OTP
+          </button>
+        </div>
+
+        <div id="otpSection" style="display: none;">
+          <input
+            type="text"
+            id="otpInput"
+            placeholder="Enter 6-digit OTP"
+            maxlength="6"
+            style="width: 100%;"
+          >
+          <button type="button" onclick="verifyOTP()" style="background: #00c853; color: black; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 8px; width: 100%;">
+            ✅ Verify OTP
+          </button>
+          <p id="otpStatus" style="color: #aaa; font-size: 13px; margin-top: 5px;"></p>
+        </div>
 
         <input
           type="email"
@@ -279,6 +300,11 @@
 
         e.preventDefault();
 
+        if (!phoneVerified) {
+          alert("⚠️ Please verify your phone number with OTP before creating your account.");
+          return;
+        }
+
         const userData = {
           name: document.getElementById("name").value,
           age: document.getElementById("age").value,
@@ -314,6 +340,71 @@
         }
 
       });
+
+    let phoneVerified = false;
+
+    async function sendOTP() {
+      const phone = document.getElementById("phone").value.trim();
+      if (phone.length !== 10 || isNaN(phone)) {
+        alert("Please enter a valid 10-digit phone number first.");
+        return;
+      }
+
+      const btn = document.getElementById("sendOtpBtn");
+      btn.textContent = "Sending...";
+      btn.disabled = true;
+
+      try {
+        const res = await fetch("https://motopool-backend.onrender.com/send-otp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ phone })
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          document.getElementById("otpSection").style.display = "block";
+          document.getElementById("otpStatus").textContent = "OTP sent! Check your SMS.";
+          document.getElementById("otpStatus").style.color = "#00c853";
+          btn.textContent = "Resend OTP";
+          btn.disabled = false;
+        } else {
+          alert(data.message);
+          btn.textContent = "Get OTP";
+          btn.disabled = false;
+        }
+      } catch (err) {
+        alert("Error sending OTP. Try again.");
+        btn.textContent = "Get OTP";
+        btn.disabled = false;
+      }
+    }
+
+    async function verifyOTP() {
+      const phone = document.getElementById("phone").value.trim();
+      const otp = document.getElementById("otpInput").value.trim();
+
+      try {
+        const res = await fetch("https://motopool-backend.onrender.com/verify-otp", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ phone, otp })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.verified) {
+          phoneVerified = true;
+          document.getElementById("otpStatus").textContent = "✅ Phone number verified!";
+          document.getElementById("otpStatus").style.color = "#00c853";
+          document.getElementById("otpInput").disabled = true;
+        } else {
+          document.getElementById("otpStatus").textContent = data.message;
+          document.getElementById("otpStatus").style.color = "#ff4444";
+        }
+      } catch (err) {
+        alert("Error verifying OTP. Try again.");
+      }
+    }  
 
   </script>
 

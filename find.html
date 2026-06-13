@@ -12,6 +12,8 @@
 
   <link rel="stylesheet" href="style.css">
 
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLz1Dt8DPVukQoepEVmB1DII7qyT3HDpA&libraries=places"></script>
+
 </head>
 
 <body>
@@ -102,6 +104,15 @@ if(!localStorage.getItem("user")){
 </script>
   
   <script src="script.js"></script>
+
+  <script>
+function initFindAutocomplete() {
+  const options = { componentRestrictions: { country: "in" } };
+  new google.maps.places.Autocomplete(document.getElementById("searchPickup"), options);
+  new google.maps.places.Autocomplete(document.getElementById("searchDrop"), options);
+}
+window.addEventListener("load", initFindAutocomplete);
+</script>
 
 </body>
 
