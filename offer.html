@@ -73,7 +73,21 @@
       
       <div class="form-group">
         <label>Pickup Location</label>
-        <input type="text" id="pickup" placeholder="e.g., Connaught Place" required>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <input type="text" id="pickup" placeholder="e.g., Connaught Place" required style="flex: 1;">
+          <button type="button" id="locateMeOffer" onclick="fetchMyLocation('pickup', 'locateMeOffer')" style="
+            background: #ffb000;
+            color: black;
+            border: none;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            white-space: nowrap;
+            font-weight: bold;
+            flex-shrink: 0;
+          ">📍</button>
+        </div>
       </div>
       
       <div class="form-group">
@@ -178,6 +192,66 @@ function setupAutocomplete(inputId) {
 
 setupAutocomplete("pickup");
 setupAutocomplete("drop");
+</script>
+
+<script>
+async function fetchMyLocation(inputId, btnId) {
+  const btn = document.getElementById(btnId);
+  const input = document.getElementById(inputId);
+
+  if (!navigator.geolocation) {
+    alert("Your browser doesn't support location access.");
+    return;
+  }
+
+  btn.textContent = "⏳";
+  btn.disabled = true;
+
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+
+      try {
+        const res = await fetch(
+          `https://api.locationiq.com/v1/reverse?key=pk.9f902df33860fcb5c76439efaf0a6b9f&lat=${lat}&lon=${lon}&format=json`
+        );
+        const data = await res.json();
+
+        // Build a clean address from the response
+        const addr = data.address;
+        const parts = [
+          addr.neighbourhood || addr.suburb,
+          addr.city_district || addr.county,
+          addr.city || addr.town || addr.village,
+          addr.state
+        ].filter(Boolean);
+
+        input.value = parts.join(", ");
+        btn.textContent = "✅";
+        setTimeout(() => {
+          btn.textContent = "📍";
+          btn.disabled = false;
+        }, 2000);
+
+      } catch (err) {
+        alert("Could not get address. Try typing manually.");
+        btn.textContent = "📍";
+        btn.disabled = false;
+      }
+    },
+    (error) => {
+      if (error.code === error.PERMISSION_DENIED) {
+        alert("⚠️ Location permission denied. Please allow location access in your browser settings.");
+      } else {
+        alert("Could not get your location. Try typing manually.");
+      }
+      btn.textContent = "📍";
+      btn.disabled = false;
+    },
+    { timeout: 10000 }
+  );
+}
 </script>
 
 </body>
