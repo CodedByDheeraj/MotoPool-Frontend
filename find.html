@@ -116,7 +116,7 @@ function setupAutocomplete(inputId) {
     }
 
     const res = await fetch(
-      `https://api.locationiq.com/v1/autocomplete?key=YOUR_LOCATIONIQ_TOKEN&q=${encodeURIComponent(query)}&countrycodes=in&limit=5`
+      `https://api.locationiq.com/v1/autocomplete?key=pk.9f902df33860fcb5c76439efaf0a6b9f&q=${encodeURIComponent(query)}&countrycodes=in&limit=5`
     );
     const results = await res.json();
 
