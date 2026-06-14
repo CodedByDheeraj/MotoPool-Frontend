@@ -233,19 +233,22 @@
             style="flex: 1;"
           >
           <button type="button" id="sendOtpBtn" onclick="sendOTP()" style="background: #ffb000; color: black; border: none; padding: 12px 14px; border-radius: 8px; font-weight: bold; cursor: pointer; white-space: nowrap;">
-            Get OTP
+            📞 Get OTP via Call
           </button>
         </div>
+        <p style="color: #aaa; font-size: 12px; margin-top: 4px;">
+          📞 You'll receive an automated phone call with your 6-digit verification code.
+        </p>
 
         <div id="otpSection" style="display: none;">
           <input
             type="text"
             id="otpInput"
-            placeholder="Enter 6-digit OTP"
+            placeholder="Enter code from the call"
             maxlength="6"
             style="width: 100%;"
           >
-          <button type="button" onclick="verifyOTP()" style="background: #00c853; color: black; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 8px; width: 100%;">
+          <button type="button" id="verifyOtpBtn" onclick="verifyOTP()" style="background: #00c853; color: black; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 8px; width: 100%;">
             ✅ Verify OTP
           </button>
           <p id="otpStatus" style="color: #aaa; font-size: 13px; margin-top: 5px;"></p>
@@ -364,9 +367,9 @@
 
         if (res.ok) {
           document.getElementById("otpSection").style.display = "block";
-          document.getElementById("otpStatus").textContent = "OTP sent! Check your SMS.";
+          document.getElementById("otpStatus").textContent = "📞 Calling you now... Please answer and listen for your 6-digit code.";
           document.getElementById("otpStatus").style.color = "#00c853";
-          btn.textContent = "Resend OTP";
+          btn.textContent = "Resend Call";
           btn.disabled = false;
         } else {
           alert(data.message);
@@ -397,6 +400,17 @@
           document.getElementById("otpStatus").textContent = "✅ Phone number verified!";
           document.getElementById("otpStatus").style.color = "#00c853";
           document.getElementById("otpInput").disabled = true;
+
+          // Hide the verify button and OTP input once verified
+          document.getElementById("verifyOtpBtn").style.display = "none";
+          document.getElementById("otpInput").style.display = "none";
+
+          // Also hide/disable the "Get OTP" button
+          const sendBtn = document.getElementById("sendOtpBtn");
+          sendBtn.textContent = "✅ Verified";
+          sendBtn.disabled = true;
+          sendBtn.style.background = "#00c853";
+          sendBtn.style.cursor = "default";
         } else {
           document.getElementById("otpStatus").textContent = data.message;
           document.getElementById("otpStatus").style.color = "#ff4444";
